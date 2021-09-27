@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata: 
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: app3
+        imagePullPolicy: Never
+        ports:
+          - name: http
+            containerPort: 3000
+            protocol: TCP

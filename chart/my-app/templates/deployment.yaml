@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "my-nest-project.fullname" . }}
+  name: {{ include "my-app.fullname" . }}
   labels:
-    {{- include "my-nest-project.labels" . | nindent 4 }}
+    {{- include "my-app.labels" . | nindent 4 }}
 spec: 
   replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
-      {{- include "my-nest-project.selectorLabels" . | nindent 6 }}
+      {{- include "my-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "my-nest-project.selectorLabels" . | nindent 8 }}
+        {{- include "my-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

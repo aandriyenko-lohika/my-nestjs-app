@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-nest-project.fullname" . }}
+  labels:
+    {{- include "my-nest-project.labels" . | nindent 4 }}
+spec: 
+  replicas: {{ .Values.replicaCount }} 
+  selector:
+    matchLabels:
+      {{- include "my-nest-project.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "my-nest-project.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: app3
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
